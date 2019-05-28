@@ -1,3 +1,4 @@
+import sys
 from room import Room
 from player import Player
 
@@ -39,7 +40,9 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-ruby = Player("Ruby", room['outside'])
+
+ruby = Player('Ruby', room['outside'])
+
 
 # Write a loop that:
 #
@@ -48,6 +51,17 @@ ruby = Player("Ruby", room['outside'])
 # * Waits for user input and decides what to do.
 #
 # If the user enters a cardinal direction, attempt to move to the room there.
+# Print an error message if the movement isn't allowed.
+#
+# If the user enters "q", quit the game.
 
 while True:
-    print(f'Room: ' {ruby.current_room.name})
+    print(f'Room: {ruby.current_room.name}')
+    print(ruby.current_room.description)
+    cmd = input('->')
+
+    if cmd == '':
+        print("Must enter 'n','s','e','w'... or 'q' to quit the game")
+    if cmd == 'q':
+        sys.exit()
+
