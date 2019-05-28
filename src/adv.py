@@ -1,6 +1,7 @@
 import sys
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -35,6 +36,12 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+# items in rooms
+room['foyer'].add_item(Item('chest', 'Wonder what is in here?'))
+room['outside'].add_item(Item('dagger', 'small dagger... it is kinda dull'))
+room['outside'].add_item(Item('necklace', 'A dirty necklace... try wiping it off'))
+room['overlook'].add_item(Item('key', 'tiny bronze key'))
+room['treasure'].add_item(Item('bottle', 'Seems to contain a message'))
 #
 # Main
 #
@@ -58,8 +65,10 @@ ruby = Player('Ruby', room['outside'])
 directions = ['n', 'e', 's', 'w']
 
 while True:
-    print(f'Room: {ruby.current_room.name}')
+    print(f"Room: {ruby.current_room.name}")
     print(ruby.current_room.description)
+    print("Items around room: ", end='')
+    print([item.name for item in ruby.current_room.items])
     cmd = str(input('q to quit...(blue pill), continue with direction (red pill)'))
 
     if cmd == '' or cmd != str:
