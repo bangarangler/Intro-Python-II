@@ -55,13 +55,22 @@ ruby = Player('Ruby', room['outside'])
 #
 # If the user enters "q", quit the game.
 
+directions = ['n', 'e', 's', 'w']
+
 while True:
     print(f'Room: {ruby.current_room.name}')
     print(ruby.current_room.description)
-    cmd = input('->')
+    cmd = str(input('q to quit...(blue pill), continue with direction (red pill)'))
 
-    if cmd == '':
+    if cmd == '' or cmd != str:
         print("Must enter 'n','s','e','w'... or 'q' to quit the game")
     if cmd == 'q':
         sys.exit()
+
+    elif cmd in directions:
+        try:
+            ruby.current_room = getattr(ruby.current_room, f'{cmd}_to')
+        except:
+            print('apparently those who wander are lost... you can not go that way.')
+
 
