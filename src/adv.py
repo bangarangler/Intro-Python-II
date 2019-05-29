@@ -40,6 +40,7 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 room['narrow'].e_to = room['cavern']
+room['cavern'].w_to = room['narrow']
 
 # items in rooms
 room['foyer'].add_item(Item('chest', 'Wonder what is in here?'))
@@ -72,12 +73,14 @@ directions = ['n', 'e', 's', 'w']
 
 while True:
     print(f"Room: {ruby.current_room.name}\n")
-    if ruby.current_room.is_light == True:
+    if ruby.current_room.is_light or [item.name == 'torch' for item in
+                                              ruby.items]:
       print(ruby.current_room.description)
       print("Items around room: \n", end='')
       print([item.name for item in ruby.current_room.items])
     else:
       print("It's pitch black \n")
+      print([item.name == 'torch' for item in ruby.items])
     cmd = str(input('q to quit...(blue pill), continue with direction (red pill)'))
 
     if cmd == '' or cmd != str:
