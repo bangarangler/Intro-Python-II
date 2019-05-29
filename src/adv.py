@@ -2,26 +2,30 @@ import sys
 from room import Room
 from player import Player
 from item import Item
+from item import LightSource
 
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", True),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", True),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", False),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", False),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""", True),
+    'cavern': Room("Dark Cavern", """It sounds like you have stepped into a
+damp cavern... it's really dark in here but the echo makes
+it seem like it is a really big room""", False),
 }
 
 
@@ -35,6 +39,7 @@ room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
+room['narrow'].e_to = room['cavern']
 
 # items in rooms
 room['foyer'].add_item(Item('chest', 'Wonder what is in here?'))
@@ -42,6 +47,7 @@ room['outside'].add_item(Item('dagger', 'small dagger... it is kinda dull'))
 room['outside'].add_item(Item('necklace', 'A dirty necklace... try wiping it off'))
 room['overlook'].add_item(Item('key', 'tiny bronze key'))
 room['treasure'].add_item(Item('bottle', 'Seems to contain a message'))
+room['cavern'].add_item(LightSource('torch', 'Bet this will help in dark areas...'))
 #
 # Main
 #
@@ -65,10 +71,13 @@ ruby = Player('Ruby', room['outside'])
 directions = ['n', 'e', 's', 'w']
 
 while True:
-    print(f"Room: {ruby.current_room.name}")
-    print(ruby.current_room.description)
-    print("Items around room: ", end='')
-    print([item.name for item in ruby.current_room.items])
+    print(f"Room: {ruby.current_room.name}\n")
+    if ruby.current_room.is_light == True:
+      print(ruby.current_room.description)
+      print("Items around room: \n", end='')
+      print([item.name for item in ruby.current_room.items])
+    else:
+      print("It's pitch black \n")
     cmd = str(input('q to quit...(blue pill), continue with direction (red pill)'))
 
     if cmd == '' or cmd != str:
