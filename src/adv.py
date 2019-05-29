@@ -82,4 +82,34 @@ while True:
         except:
             print('apparently those who wander are lost... you can not go that way.')
 
+    elif cmd == 'i':
+        print("Inventory: ", end="")
+        print([item.name for item in ruby.items])
+
+    else:
+        cmds = cmd.split(' ')
+
+        if len(cmds) != 2:
+            print('Bad Command!')
+        else:
+            verb, obj = cmds
+            if verb == 'take':
+                try:
+                    item = [x for x in ruby.current_room.items if x.name == obj][0]
+                    ruby.current_room.remove_item(item)
+                    ruby.add_item(item)
+                    item.on_take()
+                except IndexError:
+                    print('Item not found!')
+            elif verb == 'drop':
+                try:
+                    item = [x for x in ruby.items if x.name == obj][0]
+                    ruby.current_room.add_item(item)
+                    ruby.remove_item(item)
+                    item.on_drop()
+                except IndexError:
+                    print('player not holding item')
+            else:
+                print("Bad Command!")
+
 
