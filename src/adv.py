@@ -80,7 +80,6 @@ while True:
       print([item.name for item in ruby.current_room.items])
     else:
       print("It's pitch black \n")
-      print([item.name == 'torch' for item in ruby.items])
     cmd = str(input('q to quit...(blue pill), continue with direction (red pill)'))
 
     if cmd == '' or cmd != str:
