@@ -13,3 +13,10 @@ class Dragon(Boss):
 
     def fire_shot(self):
         print("Fires super hot fury!")
+
+class Warlock(Boss):
+    def __init__(self):
+        super().__init__(name="Dark Warlock", health=85, source_mana=200,
+                         current_room=['overlook'])
+    def soul_snatch(self):
+        print(f"{self.name}, uses 20 out of {self.source_mana} source_mana to snatch your soul!")

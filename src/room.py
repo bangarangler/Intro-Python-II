@@ -7,16 +7,16 @@ class Room:
         self.items = []
         self.is_light = is_light
         self.has_boss = has_boss
-        self.n_to = None
-        self.s_to = None
-        self.e_to = None
-        self.w_to = None
+        # self.n_to = None
+        # self.s_to = None
+        # self.e_to = None
+        # self.w_to = None
 
-    def __repr__(self):
-        return_string = f"*******\n\n{self.name}\n\n {self.description}\n\n*********"
-        return_string += f"Items laying around room: \n"
-        return_string += f"{[item.name for item in self.items]}"
-        return return_string
+    # def __repr__(self):
+        # return_string = f"*******\n\n{self.name}\n\n {self.description}\n\n*********"
+        # return_string += f"Items laying around room: \n"
+        # return_string += f"{[item.name for item in self.items]}"
+        # return return_string
 
 
     def add_item(self, item):

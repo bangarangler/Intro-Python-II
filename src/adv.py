@@ -4,6 +4,7 @@ from player import Player
 from item import Item
 from item import LightSource
 from boss import Dragon
+from boss import Warlock
 
 # Declare all the rooms
 
@@ -16,7 +17,7 @@ passages run north and east.""", True, False),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm.""", False, False),
+the distance, but there is no way across the chasm.""", False, True),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
 to north. The smell of gold permeates the air.""", False, False),
@@ -59,6 +60,7 @@ room['cavern'].add_item(LightSource('torch', 'Bet this will help in dark areas..
 
 ruby = Player('Ruby', room['outside'])
 boss = Dragon()
+warlock = Warlock()
 
 
 # Write a loop that:
@@ -84,8 +86,11 @@ while True:
       if ruby.current_room.has_boss:
           print(f"{boss.name}: health: {boss.health}, source mana: {boss.source_mana}")
           print(f"{boss.fire_shot()}")
+          print(f"{warlock.name}: health: {warlock.health}, source mana: {warlock.source_mana}")
+          print(f"{warlock.soul_snatch()}")
     else:
       print("It's pitch black \n")
+
     cmd = str(input('q to quit...(blue pill), continue with direction (red pill)'))
 
     if cmd == '' or cmd != str:
