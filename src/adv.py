@@ -3,7 +3,7 @@ from room import Room
 from player import Player
 from item import Item
 from item import LightSource
-from dragon import Dragon
+from boss import Dragon
 
 # Declare all the rooms
 
@@ -58,7 +58,7 @@ room['cavern'].add_item(LightSource('torch', 'Bet this will help in dark areas..
 # Make a new player object that is currently in the 'outside' room.
 
 ruby = Player('Ruby', room['outside'])
-drake = Dragon("Fire Drake",100, 100, room['treasure'])
+boss = Dragon()
 
 
 # Write a loop that:
@@ -82,7 +82,8 @@ while True:
       print("Items around room: \n", end='')
       print([item.name for item in ruby.current_room.items])
       if ruby.current_room.has_boss:
-          print(f"{drake.name}: {drake.health}, {drake.source_mana}")
+          print(f"{boss.name}: health: {boss.health}, source mana: {boss.source_mana}")
+          print(f"{boss.fire_shot()}")
     else:
       print("It's pitch black \n")
     cmd = str(input('q to quit...(blue pill), continue with direction (red pill)'))
