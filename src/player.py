@@ -12,3 +12,7 @@ class Player:
     def remove_item(self, item):
         self.items.remove(item)
 
+    def print_inventory(self):
+        for item in self.items:
+            print(item, '\n')
+
